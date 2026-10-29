@@ -16,6 +16,13 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+  api:
+    build:
+      context: ./api
+    container_name: dataops-api
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8000:8000"
 
   kafka:
     image: apache/kafka:3.9.1
