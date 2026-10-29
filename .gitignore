@@ -3,3 +3,14 @@
 __pycache__/
 *.pyc
 docker-compose.backup.yml
+# Airflow
+airflow/logs/
+airflow/airflow.db
+airflow/data/
+airflow/standalone_admin_password.txt
+airflow/config/airflow.cfg
+airflow/**/*.log
+
+# Python
+__pycache__/
+*.pyc

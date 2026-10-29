@@ -67,5 +67,26 @@ services:
 
         echo "Initialisation Kafka terminée."
 
+  airflow:
+    image: apache/airflow:2.10.5
+    container_name: dataops-airflow
+    profiles:
+      - orchestration
+    restart: unless-stopped
+
+    ports:
+      - "127.0.0.1:8080:8080"
+
+    environment:
+      AIRFLOW__CORE__EXECUTOR: SequentialExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: sqlite:////opt/airflow/data/airflow.db
+      AIRFLOW__CORE__LOAD_EXAMPLES: "False"
+
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - airflow_data:/opt/airflow/data
+
+    command: standalone
 volumes:
   postgres_data:
+  airflow_data:
