@@ -87,6 +87,19 @@ services:
       - airflow_data:/opt/airflow/data
 
     command: standalone
+  mlflow:
+    build:
+      context: ./mlflow
+    container_name: dataops-mlflow
+    profiles:
+      - mlops
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:5000:5000"
+    volumes:
+      - mlflow_data:/mlflow 
+
 volumes:
   postgres_data:
   airflow_data:
+  mlflow_data:
