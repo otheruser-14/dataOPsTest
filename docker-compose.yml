@@ -105,8 +105,18 @@ services:
       - "127.0.0.1:5000:5000"
     volumes:
       - mlflow_data:/mlflow 
-
+  jenkins:
+    image: jenkins/jenkins:lts-jdk21
+    container_name: dataops-jenkins
+    profiles:
+      - cicd
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8081:8080"
+    volumes:
+      - jenkins_data:/var/jenkins_home
 volumes:
   postgres_data:
   airflow_data:
   mlflow_data:
+  jenkins_data:
